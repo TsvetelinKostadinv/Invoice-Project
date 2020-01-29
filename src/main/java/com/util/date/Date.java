@@ -7,12 +7,18 @@ package com.util.date;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * @author Tsvetelin
  *
  */
-public final class Date implements Serializable
+@XmlRootElement ( name = "date" )
+@XmlAccessorType ( XmlAccessType.FIELD )
+public final class Date implements Serializable , Comparable< Date >
 {
 
     /**
@@ -44,6 +50,17 @@ public final class Date implements Serializable
         {
             throw new IllegalArgumentException( " Incorrect date! " );
         }
+    }
+
+    /**
+     * 
+     */
+    public Date ()
+    {
+        super();
+        this.day = 1;
+        this.month = 1;
+        this.year = 1;
     }
 
     @SuppressWarnings ( value = { "all" } )

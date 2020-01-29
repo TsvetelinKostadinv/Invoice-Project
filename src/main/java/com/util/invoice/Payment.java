@@ -8,6 +8,9 @@ package com.util.invoice;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.util.Constants;
 import com.util.date.Date;
 
@@ -16,6 +19,8 @@ import com.util.date.Date;
  * @author Tsvetelin
  *
  */
+@XmlRootElement ( name = "payment" )
+//@XmlAccessorType(XmlAccessType.FIELD)
 public class Payment implements Serializable
 {
 
@@ -24,9 +29,9 @@ public class Payment implements Serializable
      */
     private static final long serialVersionUID = 1L;
 
-    private final Date       dateOfPayment;
+    private final Date        dateOfPayment;
 
-    private final BigDecimal payedAmount;
+    private final BigDecimal  payedAmount;
 
     /**
      * @param dateOfPayment
@@ -36,22 +41,33 @@ public class Payment implements Serializable
     {
         super();
         this.dateOfPayment = dateOfPayment;
-        this.payedAmount = payedAmount.setScale( Constants.DECIMAL_PLACES , Constants.ROUNDING_MODE );
+        this.payedAmount = payedAmount.setScale( Constants.DECIMAL_PLACES ,
+                                                 Constants.ROUNDING_MODE );
     }
 
-    
+    /**
+     * 
+     */
+    public Payment ()
+    {
+        super();
+        this.dateOfPayment = new Date();
+        this.payedAmount = BigDecimal.ZERO;
+    }
+
     /**
      * @return the dateOfPayment
      */
+    @XmlElement
     public Date getDateOfPayment ()
     {
         return dateOfPayment;
     }
 
-    
     /**
      * @return the payedAmount
      */
+    @XmlElement
     public BigDecimal getPayedAmount ()
     {
         return payedAmount;
