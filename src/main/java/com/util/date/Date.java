@@ -182,6 +182,37 @@ public final class Date implements Serializable , Comparable< Date >
     /*
      * (non-Javadoc)
      * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo ( Date o )
+    {
+
+        // FIXME this could be done better
+        if ( this.year == o.year )
+        {
+            if ( this.month == o.month )
+            {
+                if ( this.day == o.day )
+                {
+                    return 0;
+                } else
+                {
+                    return this.day > o.day ? 1 : -1;
+                }
+            } else
+            {
+                return this.month > o.month ? 1 : -1;
+            }
+        } else
+        {
+            return this.year > o.year ? 1 : -1;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override

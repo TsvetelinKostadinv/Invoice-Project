@@ -7,7 +7,8 @@ package com.util.invoice;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -23,9 +24,9 @@ import com.util.date.Date;
  * @author Tsvetelin
  *
  */
-public class Invoice implements Serializable
 @XmlRootElement ( name = "invoice" )
 @XmlAccessorType ( XmlAccessType.FIELD )
+public class Invoice implements Serializable, Comparable< Invoice >
 {
 
     /**
@@ -136,6 +137,72 @@ public class Invoice implements Serializable
     public List< Payment > getPayments ()
     {
         return payments;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo ( Invoice o )
+    {
+        // Natural ordering of invoices ( by numbers )
+        return this.number.compareTo( o.getNumber() );
+    }
+    
+    //FIXME these can be done in a better way (functionally)
+    
+    public static final Comparator< Invoice > SORT_ASCENDING_BY_VALUE = ( inv1, inv2 ) -> {
+        final int res = inv1.value.compareTo( inv2.value );
+        return res != 0 ? res : inv1.compareTo( inv2 );
+    };
+    
+    public static final Comparator< Invoice > SORT_DESCENDING_BY_VALUE = ( inv1, inv2 ) -> {
+        final int res = inv1.value.compareTo( inv2.value );
+        return res != 0 ? -res : inv1.compareTo( inv2 );
+    };
+    
+    public static final Comparator< Invoice > SORT_ASCENDING_BY_DATE = ( inv1, inv2 ) -> {
+        final int res = inv1.dateOfInvoice.compareTo( inv2.dateOfInvoice );
+        return res != 0 ? res : inv1.compareTo( inv2 );
+    };
+    
+    public static final Comparator< Invoice > SORT_DESCENDING_BY_DATE = ( inv1, inv2 ) -> {
+        final int res = inv1.dateOfInvoice.compareTo( inv2.dateOfInvoice );
+        return res != 0 ? -res : inv1.compareTo( inv2 );
+    };
+    
+    public static final Comparator< Invoice > SORT_ASCENDING_BY_PAID = ( inv1, inv2 ) -> {
+        final int res = inv1.paid().compareTo( inv2.paid() );
+        return res != 0 ? res : inv1.compareTo( inv2 );
+    };
+    
+    public static final Comparator< Invoice > SORT_DESCENDING_BY_PAID = ( inv1, inv2 ) -> {
+        final int res = inv1.paid().compareTo( inv2.paid() );
+        return res != 0 ? -res : inv1.compareTo( inv2 );
+    };
+    
+    public static final Comparator< Invoice > SORT_ASCENDING_BY_REMAINING = ( inv1, inv2 ) -> {
+        final int res = inv1.rest().compareTo( inv2.rest() );
+        return res != 0 ? res : inv1.compareTo( inv2 );
+    };
+    
+    public static final Comparator< Invoice > SORT_DESCENDING_BY_REMAINING = ( inv1, inv2 ) -> {
+        final int res = inv1.rest().compareTo( inv2.rest() );
+        return res != 0 ? -res : inv1.compareTo( inv2 );
+    };
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals ( Object obj )
+    {
+        return obj instanceof Invoice
+                && ( ( Invoice ) obj ).number.equals( this.number )
+                && ( ( Invoice ) obj ).dateOfInvoice.equals( this.dateOfInvoice )
+                && ( ( Invoice ) obj ).payments.equals( payments );
     }
 
     /*
