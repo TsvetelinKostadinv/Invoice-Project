@@ -5,9 +5,12 @@
 package com.util;
 
 
+import java.awt.Font;
+import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.function.Supplier;
 
 
 /**
@@ -25,6 +28,11 @@ public abstract class Constants implements Serializable
     public static final int          DECIMAL_PLACES = 2;
 
     public static final RoundingMode ROUNDING_MODE  = RoundingMode.HALF_UP;
+    
+    public static final String DEFAULT_PATH = "C:/ITracker";
+    public static final File DEFAULT_FILE = new File( "C:/ITracker" );
+    
+    public static final Supplier<Font> ARIAL_20 = () -> new Font( "Arial" , 0 , 20 );
     
     
     public static enum BigDecimalNumbers
