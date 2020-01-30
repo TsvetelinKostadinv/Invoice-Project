@@ -29,8 +29,8 @@ public abstract class Constants implements Serializable
 
     public static final RoundingMode ROUNDING_MODE  = RoundingMode.HALF_UP;
     
-    public static final String DEFAULT_PATH = "C:/ITracker";
-    public static final File DEFAULT_FILE = new File( "C:/ITracker" );
+    public static final String DEFAULT_PATH = "D:/ITracker";
+    public static final File DEFAULT_FILE = new File( DEFAULT_PATH );
     
     public static final Supplier<Font> ARIAL_20 = () -> new Font( "Arial" , 0 , 20 );
     
