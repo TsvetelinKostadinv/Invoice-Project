@@ -2,7 +2,7 @@
  * 21/01/2020 22:59:29
  * Payment.java created by Tsvetelin
  */
-package com.util.invoice;
+package com.models.invoice;
 
 
 import java.io.Serializable;
@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.models.date.Date;
 import com.util.Constants;
-import com.util.date.Date;
 
 
 /**

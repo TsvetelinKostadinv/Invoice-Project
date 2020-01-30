@@ -6,4 +6,4 @@
  * @author Tsvetelin
  *
  */
-package com.util.date;
+package com.models.date;

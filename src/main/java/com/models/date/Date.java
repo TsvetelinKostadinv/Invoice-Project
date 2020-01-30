@@ -2,7 +2,7 @@
  * 21/01/2020 23:06:26
  * Date.java created by Tsvetelin
  */
-package com.util.date;
+package com.models.date;
 
 
 import java.io.Serializable;

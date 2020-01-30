@@ -6,4 +6,4 @@
  * @author Tsvetelin
  *
  */
-package com.util.invoice;
+package com.models.invoice;
